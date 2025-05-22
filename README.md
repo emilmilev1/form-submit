@@ -1,46 +1,103 @@
-# Getting Started with Create React App
+# User Registration Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+This project is a multi-step user registration form built with React, React Hook Form, and Zod for validation. It features two steps:
 
-In the project directory, you can run:
+* **Step 1:** Collect user credentials and interests.
+* **Step 2:** Upload an avatar and submit the complete form data.
 
-### `npm start`
+The form includes client-side validation and file upload handling. It demonstrates best practices with React Hook Form, schema validation, and clean UI design using Chakra UI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setup Instructions
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Node.js (v14 or higher recommended)
+* npm package manager
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/emilmilev1/form-submit.git
+   ```
+2. Navigate into the project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   cd form-submit
+   ```
+3. Install dependencies:
 
-### `npm run eject`
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Running the App Locally
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the development server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Open your browser and visit `http://localhost:3000` to see the app in action.
 
-## Learn More
+### Building for Production
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To create a production build:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
+
+The optimized build will be available in the `build` folder.
+
+---
+
+## Folder Structure Overview
+
+```
+/src
+  /components        # Reusable UI components and form steps
+  /interfaces        # TypeScript interfaces for form data and other /types
+  /pages             # Main page components like RegistrationForm
+  /schemas           # Zod validation schemas
+  /hooks             # Custom hooks like useFetch for API requests
+  /mocks             # A mock server for the interests endpoint and the form submission.
+  index.tsx          # App entry point
+```
+
+---
+
+## Important Notes
+
+* Form validation is handled with Zod integrated via `@hookform/resolvers`.
+* The multi-step form uses React Hook Form's `FormProvider` for shared form state.
+* The file upload uses the native HTML file input and FormData for submission.
+* The project includes error handling for API fetches.
+* Consistent commits were made throughout development to reflect progress.
+
+---
+
+## Commit History
+
+The project includes at least 10 meaningful commits showing feature additions, fixes, and improvements.
+
+---
+
+## Deployment (Bonus)
+
+This project is deployed and accessible online:
+
+[Live Demo on Vercel](https://form-submit-gules.vercel.app)
+
+---
+
+Feel free to reach out if you have any questions or suggestions!
+
+*Author: Your Name*
+*Contact: [emil.milev.pro@gmail.com](mailto:emil.milev.pro@gmail.com)*
