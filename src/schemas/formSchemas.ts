@@ -19,5 +19,5 @@ export const step1Schema = z
     });
 
 export const step2Schema = z.object({
-    avatar: z.instanceof(FileList),
+    avatar: z.instanceof(File).nullable(),
 });

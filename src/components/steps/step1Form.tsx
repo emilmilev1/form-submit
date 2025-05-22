@@ -6,7 +6,6 @@ import {
     CheckboxGroup,
     Stack,
     CheckboxRoot,
-    Heading,
     Flex,
 } from '@chakra-ui/react';
 import {
@@ -36,15 +35,6 @@ const Step1Form: React.FC<Step1FormProps> = ({
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <>
-                <Heading
-                    w="100%"
-                    textAlign={'center'}
-                    fontWeight="normal"
-                    mb="2%"
-                >
-                    User Registration
-                </Heading>
-
                 {/* Names Input */}
                 <Flex>
                     <FormControl mr="5%">
@@ -54,6 +44,7 @@ const Step1Form: React.FC<Step1FormProps> = ({
                             placeholder="Enter your first name"
                             {...register('firstName')}
                             borderColor="teal.400"
+                            autoComplete="given-name"
                         />
                         <FormErrorMessage>
                             {errors.firstName?.message}
@@ -67,6 +58,7 @@ const Step1Form: React.FC<Step1FormProps> = ({
                             placeholder="Enter your last name"
                             {...register('lastName')}
                             borderColor="teal.400"
+                            autoComplete="family-name"
                         />
                         <FormErrorMessage>
                             {errors.lastName?.message}
@@ -83,6 +75,7 @@ const Step1Form: React.FC<Step1FormProps> = ({
                         placeholder="Enter password"
                         {...register('password')}
                         borderColor="teal.400"
+                        autoComplete="new-password"
                     />
                     <FormErrorMessage>
                         {errors.password?.message}
@@ -100,6 +93,7 @@ const Step1Form: React.FC<Step1FormProps> = ({
                         placeholder="Re-enter your password"
                         {...register('confirmPassword')}
                         borderColor="teal.400"
+                        autoComplete="new-password"
                     />
                     <FormErrorMessage>
                         {errors.confirmPassword?.message}
@@ -107,15 +101,15 @@ const Step1Form: React.FC<Step1FormProps> = ({
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.interests}>
-                    <FormLabel htmlFor="interests">Interests</FormLabel>
+                    <FormLabel as={'legend'}>Interests</FormLabel>
                     <CheckboxGroup>
                         <Stack>
                             {interests.map((interest) => (
                                 <CheckboxRoot
                                     id={`interest-${interest.id}`}
                                     key={interest.id}
-                                    value={interest.id.toString()}
-                                    {...methods.register('interests')}
+                                    value={interest.name}
+                                    {...register('interests')}
                                 >
                                     <Checkbox.HiddenInput />
                                     <Checkbox.Control />

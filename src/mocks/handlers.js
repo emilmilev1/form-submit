@@ -1,7 +1,5 @@
 import { http, HttpResponse } from "msw";
 
-const registeredUser = {};
-
 export const handlers = [
     // Mock GET request to fetch interests
     http.get("/api/interests", () => {
@@ -10,6 +8,8 @@ export const handlers = [
 
     // POST form submission endpoint
     http.post("/api/submit", async ({ request }) => {
+        const registeredUser = {};
+
         const formData = await request.formData();
 
         const firstName = formData.get("firstName")?.toString() || "";
@@ -18,15 +18,20 @@ export const handlers = [
         const avatar = formData.get("avatar");
 
         const interestsStr = formData.get("interests")?.toString() || "[]";
-        let interests;
+        let interests = [];
         try {
             interests = JSON.parse(interestsStr);
         } catch {
             interests = [];
         }
 
-        if (!(avatar instanceof File)) {
+        if (!(avatar)) {
             return HttpResponse.json({ message: "Avatar file is required" }, { status: 400 });
+        }
+        if (!(avatar instanceof File)) {
+            return new HttpResponse('Uploaded document is not a File', {
+                status: 400,
+            })
         }
 
         if (!firstName || !lastName || !password || interests.length === 0) {
