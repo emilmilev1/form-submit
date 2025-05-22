@@ -8,8 +8,6 @@ import {
     CheckboxRoot,
     Heading,
     Flex,
-    Box,
-    InputElement,
 } from '@chakra-ui/react';
 import {
     FormControl,
@@ -33,10 +31,10 @@ const Step1Form: React.FC<Step1FormProps> = ({
     errors,
     interests,
 }) => {
-    const { register } = methods;
+    const { register, handleSubmit } = methods;
 
     return (
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <>
                 <Heading
                     w="100%"
@@ -130,7 +128,15 @@ const Step1Form: React.FC<Step1FormProps> = ({
                     </CheckboxGroup>
                 </FormControl>
 
-                <Button type="submit">Next</Button>
+                <Button
+                    id="next-button"
+                    type="submit"
+                    w="7rem"
+                    colorScheme="teal"
+                    variant="outline"
+                >
+                    Next
+                </Button>
             </>
         </form>
     );
