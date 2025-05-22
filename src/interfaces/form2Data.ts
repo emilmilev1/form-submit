@@ -1,3 +1,3 @@
 export interface Form2Data {
-    avatar: File;
+    avatar: FileList;
 }

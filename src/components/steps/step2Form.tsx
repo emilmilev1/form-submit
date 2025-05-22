@@ -1,6 +1,10 @@
 import React from 'react';
 import { VStack, Input, Button } from '@chakra-ui/react';
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
+import {
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+} from '@chakra-ui/form-control';
 import { useFormContext, UseFormReturn } from 'react-hook-form';
 import { Form2Data } from '../../interfaces/form2Data';
 
@@ -17,11 +21,16 @@ const Step2Form: React.FC<Step2FormProps> = ({ onSubmit, errors }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <VStack>
                 <FormControl isInvalid={!!errors.avatar}>
-                    <FormLabel>Upload Avatar</FormLabel>
-                    <Input type="file" {...register('avatar')} />
+                    <FormLabel htmlFor="avatar">Upload Avatar</FormLabel>
+                    <Input id="avatar" type="file" {...register('avatar')} />
+                    <FormErrorMessage>
+                        {errors.avatar?.message}
+                    </FormErrorMessage>
                 </FormControl>
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit" colorScheme="teal">
+                    Submit
+                </Button>
             </VStack>
         </form>
     );

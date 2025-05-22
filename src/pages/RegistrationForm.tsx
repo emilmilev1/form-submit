@@ -9,12 +9,15 @@ import { useFetch } from '../hooks/useFetch';
 import Step1Form from '../components/steps/step1Form';
 import Step2Form from '../components/steps/step2Form';
 import { step1Schema, step2Schema } from '../schemas/formSchemas';
+import { toaster } from '../components/ui/toaster';
 
 const mockInterestsEndpoint = '/api/interests';
 const mockSubmissionEndpoint = '/api/submit';
 
 const RegistrationForm: React.FC = () => {
     const [step, setStep] = useState(1);
+    const [step1Data, setStep1Data] = useState<Form1Data | null>(null);
+
     const { data: interests, error: fetchError } = useFetch<Interest[]>(
         mockInterestsEndpoint
     );
@@ -34,13 +37,25 @@ const RegistrationForm: React.FC = () => {
     }
 
     const onSubmitStep1 = (data: Form1Data) => {
-        console.log('Step 1 Data:', data);
+        setStep1Data(data);
         setStep(2);
     };
 
     const onSubmitStep2 = async (data: Form2Data) => {
+        if (!step1Data) {
+            toaster.error({ title: 'Step 1 data is missing!' });
+            return;
+        }
+
         const formData = new FormData();
-        formData.append('avatar', data.avatar);
+        if (data.avatar && data.avatar.length > 0) {
+            formData.append('avatar', data.avatar[0]);
+        }
+
+        formData.append('firstName', step1Data.firstName);
+        formData.append('lastName', step1Data.lastName);
+        formData.append('password', step1Data.password);
+        formData.append('interests', JSON.stringify(step1Data.interests));
 
         try {
             const response = await fetch(mockSubmissionEndpoint, {
@@ -52,8 +67,10 @@ const RegistrationForm: React.FC = () => {
             }
             const result = await response.json();
             console.log('Form submitted successfully!', result);
+            toaster.success({ title: 'Form submitted successfully!' });
         } catch (error) {
             console.error('Error submitting form:', error);
+            toaster.error({ title: 'Error submitting form!' });
         }
     };
 
