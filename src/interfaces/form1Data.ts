@@ -1,5 +1,6 @@
 export interface Form1Data {
-    names: string;
+    firstName: string;
+    lastName: string;
     password: string;
     confirmPassword: string;
     interests: [string, ...string[]];
